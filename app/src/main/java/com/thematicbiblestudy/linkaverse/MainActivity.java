@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
             webView.getSettings().setDomStorageEnabled(true);
 
             webView.setWebViewClient(new WebViewClient());
-            webView.loadUrl("https://thematic-bible-study-1069205335378.us-west1.run.app/");
+            webView.loadUrl("https://thematic-bible-study-1069205335378.us-west1.run.app/");  // Version1
+            webView.loadUrl("https://thematic-bible-study-version2-1057557451540.us-west1.run.app/");  // Version2
             webView.addJavascriptInterface(new WebAppInterface(this), "Android");
 
         }
