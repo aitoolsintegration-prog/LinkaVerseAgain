@@ -10,12 +10,16 @@ import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import android.content.Intent;
+import android.webkit.JavascriptInterface;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    String websiteURL = "https://thematic-bible-study-1069205335378.us-west1.run.app/"; // sets web url
-    private WebView webview;
+//    String websiteURL = "https://thematic-bible-study-1069205335378.us-west1.run.app/"; // sets web url
+//    private
+    WebView webview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +47,21 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-            //Webview stuff
-            webview = findViewById(R.id.webView);
-            webview.getSettings().setJavaScriptEnabled(true);
-            webview.getSettings().setDomStorageEnabled(true);
-            webview.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
-            webview.loadUrl(websiteURL);
-            webview.setWebViewClient(new WebViewClientDemo());
+//            //Webview stuff
+//            webview = findViewById(R.id.webView);
+//            webview.getSettings().setJavaScriptEnabled(true);
+//            webview.getSettings().setDomStorageEnabled(true);
+//            webview.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
+//            webview.loadUrl(websiteURL);
+//            webview.setWebViewClient(new WebViewClientDemo());
+
+            webView = findViewById(R.id.webView);
+
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.getSettings().setDomStorageEnabled(true);
+
+            webView.setWebViewClient(new WebViewClient());
+            webView.loadUrl("https://thematic-bible-study-1069205335378.us-west1.run.app/");
 
         }
     }
@@ -65,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //set back button functionality
-    @Override
+    /*@Override
     public void onBackPressed() { //if user presses the back button do this
         if (webview.isFocused() && webview.canGoBack()) { //check if in webview and the user can go back
             webview.goBack(); //go back in webview
@@ -83,9 +95,16 @@ public class MainActivity extends AppCompatActivity {
                     .setNegativeButton("No", null)
                     .show();
         }
+    }*/
+
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
+        }
     }
-
-
 
 }
 
@@ -120,4 +139,26 @@ class CheckNetwork {
     }
 }
 
+
+
+
+class WebAppInterface {
+    private Context context;
+
+    WebAppInterface(Context context) {
+        this.context = context;
+    }
+
+    @JavascriptInterface
+    public void shareBibleText(String text) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        context.startActivity(
+                Intent.createChooser(intent, "Share via")
+        );
+    }
+}
 

@@ -21,13 +21,13 @@
 
         android:layout_height="300dp"
 
-        android:src="@drawable/logo"
+        android:layout_marginTop="220dp"
+
+        android:padding="20dp"
 
         android:scaleType="centerCrop"
 
-        android:padding="50dp"
-
-        android:layout_marginTop="220dp"/>
+        android:src="@drawable/logo" />
 
     <ProgressBar
 
