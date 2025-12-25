@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
 //    String websiteURL = "https://thematic-bible-study-1069205335378.us-west1.run.app/"; // sets web url
 //    private
-    WebView webview;
+    WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
